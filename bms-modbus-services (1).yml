@@ -1,0 +1,269 @@
+services:
+  bms-2:
+    container_name: telegraf_bms_2
+    depends_on:
+    - modbus-proxy-2
+    env_file:
+    - stack.env
+    - bms_2.env
+    hostname: telegraf_bms_2
+    image: telegraf:1.32-alpine
+    networks:
+    - gloryhole
+    restart: unless-stopped
+    volumes:
+    - ./telegraf:/etc/telegraf
+  bms-3:
+    container_name: telegraf_bms_3
+    depends_on:
+    - modbus-proxy-3
+    env_file:
+    - stack.env
+    - bms_3.env
+    hostname: telegraf_bms_3
+    image: telegraf:1.32-alpine
+    networks:
+    - gloryhole
+    restart: unless-stopped
+    volumes:
+    - ./telegraf:/etc/telegraf
+  bms-4:
+    container_name: telegraf_bms_4
+    depends_on:
+    - modbus-proxy-4
+    env_file:
+    - stack.env
+    - bms_4.env
+    hostname: telegraf_bms_4
+    image: telegraf:1.32-alpine
+    networks:
+    - gloryhole
+    restart: unless-stopped
+    volumes:
+    - ./telegraf:/etc/telegraf
+  bms-5:
+    container_name: telegraf_bms_5
+    depends_on:
+    - modbus-proxy-5
+    env_file:
+    - stack.env
+    - bms_5.env
+    hostname: telegraf_bms_5
+    image: telegraf:1.32-alpine
+    networks:
+    - gloryhole
+    restart: unless-stopped
+    volumes:
+    - ./telegraf:/etc/telegraf
+  bms-6:
+    container_name: telegraf_bms_6
+    depends_on:
+    - modbus-proxy-6
+    env_file:
+    - stack.env
+    - bms_6.env
+    hostname: telegraf_bms_6
+    image: telegraf:1.32-alpine
+    networks:
+    - gloryhole
+    restart: unless-stopped
+    volumes:
+    - ./telegraf:/etc/telegraf
+  bms_module_monitoring_helper-1:
+    container_name: bms_module_monitoring_helper_1
+    depends_on:
+    - modbus-proxy-1
+    env_file:
+    - stack.env
+    - bms_1.env
+    hostname: bms_module_monitoring_helper_1
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  bms_module_monitoring_helper-2:
+    container_name: bms_module_monitoring_helper_2
+    depends_on:
+    - modbus-proxy-2
+    env_file:
+    - stack.env
+    - bms_2.env
+    hostname: bms_module_monitoring_helper_2
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  bms_module_monitoring_helper-3:
+    container_name: bms_module_monitoring_helper_3
+    depends_on:
+    - modbus-proxy-3
+    env_file:
+    - stack.env
+    - bms_3.env
+    hostname: bms_module_monitoring_helper_3
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  bms_module_monitoring_helper-4:
+    container_name: bms_module_monitoring_helper_4
+    depends_on:
+    - modbus-proxy-4
+    env_file:
+    - stack.env
+    - bms_4.env
+    hostname: bms_module_monitoring_helper_4
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  bms_module_monitoring_helper-5:
+    container_name: bms_module_monitoring_helper_5
+    depends_on:
+    - modbus-proxy-5
+    env_file:
+    - stack.env
+    - bms_5.env
+    hostname: bms_module_monitoring_helper_5
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  bms_module_monitoring_helper-6:
+    container_name: bms_module_monitoring_helper_6
+    depends_on:
+    - modbus-proxy-6
+    env_file:
+    - stack.env
+    - bms_6.env
+    hostname: bms_module_monitoring_helper_6
+    image: juegitops/bms_module_monitoring_helper
+    networks:
+    - gloryhole
+    restart: unless-stopped
+  modbus-proxy-1:
+    command:
+    - server
+    - -t
+    - 10.1.32.51:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_1
+    env_file:
+    - stack.env
+    - bms_1.env
+    hostname: modbus_proxy_bms_1
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30001:602
+    restart: unless-stopped
+  modbus-proxy-2:
+    command:
+    - server
+    - -t
+    - 10.1.32.52:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_2
+    env_file:
+    - stack.env
+    - bms_2.env
+    hostname: modbus_proxy_bms_2
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30002:602
+    restart: unless-stopped
+  modbus-proxy-3:
+    command:
+    - server
+    - -t
+    - 10.1.33.51:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_3
+    env_file:
+    - stack.env
+    - bms_3.env
+    hostname: modbus_proxy_bms_3
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30003:602
+    restart: unless-stopped
+  modbus-proxy-4:
+    command:
+    - server
+    - -t
+    - 10.1.33.52:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_4
+    env_file:
+    - stack.env
+    - bms_4.env
+    hostname: modbus_proxy_bms_4
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30004:602
+    restart: unless-stopped
+  modbus-proxy-5:
+    command:
+    - server
+    - -t
+    - 10.1.34.51:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_5
+    env_file:
+    - stack.env
+    - bms_5.env
+    hostname: modbus_proxy_bms_5
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30005:602
+    restart: unless-stopped
+  modbus-proxy-6:
+    command:
+    - server
+    - -t
+    - 10.1.34.52:602
+    - -l
+    - '602'
+    - -p
+    - modbus
+    - -v
+    container_name: modbus_proxy_bms_6
+    env_file:
+    - stack.env
+    - bms_6.env
+    hostname: modbus_proxy_bms_6
+    image: juegitops/tcp_multiplexer
+    networks:
+    - gloryhole
+    ports:
+    - 30006:602
+    restart: unless-stopped

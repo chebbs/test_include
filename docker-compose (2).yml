@@ -1,0 +1,23 @@
+services:
+  bms-1:
+    container_name: telegraf_bms_1
+    depends_on:
+      - modbus-proxy-1
+    env_file:
+      - ./projects/${PORTAINER_EDGE_ID}/stack.env
+      - ./projects/${PORTAINER_EDGE_ID}/bms_1.env
+    hostname: telegraf_bms_1
+    image: telegraf:1.32-alpine
+    restart: unless-stopped
+    networks:
+      - gloryhole
+    volumes:
+      - ./telegraf:/etc/telegraf
+
+  # Include additional BMS and Modbus services
+include:
+  - path: ./projects/${PORTAINER_EDGE_ID}/bms-modbus-services.yml
+
+networks:
+  gloryhole:
+    external: true

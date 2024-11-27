@@ -1,0 +1,23 @@
+services:
+  bms-1:
+    container_name: telegraf_bms_1
+    depends_on:
+      - modbus-proxy-1
+    env_file:
+      - ./projects/SMAREG3/stack.env
+      - ./projects/SMAREG3/bms_1.env
+    hostname: telegraf_bms_1
+    image: telegraf:1.32-alpine
+    restart: unless-stopped
+    networks:
+      - gloryhole
+    volumes:
+      - ./telegraf:/etc/telegraf
+
+  # Include additional BMS and Modbus services
+include:
+  - path: ./projects/SMAREG3/bms-modbus-services.yml
+
+networks:
+  gloryhole:
+    external: true
