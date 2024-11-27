@@ -16,7 +16,7 @@ services:
 
   # Include additional BMS and Modbus services
 include:
-  - path: ./projects/${PORTAINER_EDGE_ID}/bms-modbus-services.yml
+  - path: ./bms-modbus-services.yml
 
 networks:
   gloryhole:
