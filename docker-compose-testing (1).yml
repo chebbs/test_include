@@ -16,7 +16,7 @@ services:
 
   # Include additional BMS and Modbus services
 include:
-  - path: ./projects/SMAREG3/bms-modbus-services.yml
+  - path: ./bms-modbus-services.yml
 
 networks:
   gloryhole:
